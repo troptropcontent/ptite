@@ -109,12 +109,11 @@
 <part>id</part>
 </key>
 </table>
-<table x="205" y="802" name="friend_request">
+<table x="235" y="687" name="friend_request">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
-<default>NULL</default><relation table="user" row="id" />
-</row>
-<row name="user_id" null="1" autoincrement="0">
+<default>NULL</default></row>
+<row name="friend_id" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default><relation table="friend" row="id" />
 </row>
@@ -124,6 +123,10 @@
 <row name="friend" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
+<row name="user_id" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="user" row="id" />
+</row>
 <key type="PRIMARY" name="">
 <part>id</part>
 </key>
@@ -147,7 +150,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="508" y="595" name="friend">
+<table x="559" y="606" name="friend">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>

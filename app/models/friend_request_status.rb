@@ -1,0 +1,2 @@
+class FriendRequestStatus < ApplicationRecord
+end

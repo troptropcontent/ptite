@@ -1,0 +1,2 @@
+class InvitationStatus < ApplicationRecord
+end
