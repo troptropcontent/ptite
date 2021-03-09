@@ -1,7 +1,5 @@
 class FriendRequest < ApplicationRecord
   belongs_to :user
-  has_one :friend_request_status
-  has_one :friend
-
-
+  belongs_to :friend_request_status
+  belongs_to :friend
 end

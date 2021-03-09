@@ -6,13 +6,13 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-friend_request_status = %w(accepted rejected blocked)
+friend_request_status = %w(sent accepted rejected blocked)
 friend_request_status.each do |status|
   new_status = FriendRequestStatus.new(name: status)
   new_status.save!
 end
 
-invitation_status = %w(accepted rejected may_be)
+invitation_status = %w(sent accepted rejected may_be)
 invitation_status.each do |status|
   new_status = InvitationStatus.new(name: status)
   new_status.save!
@@ -32,5 +32,27 @@ end
   new_user.password = 'testpassword123456'
   new_user.password_confirmation = new_user.password
   new_user.save!
-
 end
+
+# sending friend request
+
+User.all.each do |user|
+  10.times do
+  # send 10 invites
+  users_requested = user.invitations_sent
+  user_requesters = user.invitations_received
+  unrequested_user = User.all.reject{|user| invitations_sent.include?(user) || invitation_received.include?(user)  }
+  random_unrequested_user = unrequested_user.sample
+  # create a new request
+  new_request = user.friend_requests.new
+  new_friend = Friend.new
+  new_friend.user = random_unrequested_user
+  new_friend.save!
+  new_request.friend = new_friend
+  new_request.friend_request_status = FriendRequestStatus.first
+  new_request.save!
+  end
+end
+
+
+

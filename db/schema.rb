@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_08_213414) do
+ActiveRecord::Schema.define(version: 2021_03_09_083139) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,16 +39,16 @@ ActiveRecord::Schema.define(version: 2021_03_08_213414) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "friend_request_status_id", null: false
+    t.bigint "friend_id", null: false
+    t.index ["friend_id"], name: "index_friend_requests_on_friend_id"
     t.index ["friend_request_status_id"], name: "index_friend_requests_on_friend_request_status_id"
     t.index ["user_id"], name: "index_friend_requests_on_user_id"
   end
 
   create_table "friends", force: :cascade do |t|
-    t.bigint "friend_request_id"
     t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["friend_request_id"], name: "index_friends_on_friend_request_id"
     t.index ["user_id"], name: "index_friends_on_user_id"
   end
 
@@ -106,8 +106,8 @@ ActiveRecord::Schema.define(version: 2021_03_08_213414) do
   add_foreign_key "events", "privacies"
   add_foreign_key "events", "users"
   add_foreign_key "friend_requests", "friend_request_statuses"
+  add_foreign_key "friend_requests", "friends"
   add_foreign_key "friend_requests", "users"
-  add_foreign_key "friends", "friend_requests"
   add_foreign_key "friends", "users"
   add_foreign_key "invitations", "events"
   add_foreign_key "invitations", "invitation_statuses"
